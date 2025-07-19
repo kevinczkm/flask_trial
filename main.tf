@@ -15,7 +15,7 @@ provider "aws" {
 
 
 locals {
-  prefix = "kvin"
+  prefix = "kvin9"
 }
 
 data "aws_caller_identity" "current" {}
@@ -51,7 +51,7 @@ resource "aws_ecs_task_definition" "app" {
   cpu                      = "512"
   memory                   = "1024"
   network_mode             = "awsvpc"
-#   execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
+  execution_role_arn       = var.execution_role_arn
 
   container_definitions = jsonencode([
     {
