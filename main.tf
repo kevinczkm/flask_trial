@@ -13,6 +13,11 @@ provider "aws" {
   region = "ap-southeast-1"
 }
 
+
+locals {
+  prefix = "kvin"
+}
+
 # Security Group
 resource "aws_security_group" "app_sg" {
   name        = "${local.prefix}-sg"
@@ -33,4 +38,27 @@ resource "aws_security_group" "app_sg" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
+}
+
+resource "aws_ecs_task_definition" "app" {
+  family                   = "${local.prefix}-taskdef"
+  requires_compatibilities = ["FARGATE"]
+  cpu                      = "512"
+  memory                   = "1024"
+  network_mode             = "awsvpc"
+  execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
+
+  container_definitions = jsonencode([
+    {
+      name      = "${local.prefix}-container",
+      image     = "your-ecr-url:latest",
+      essential = true,
+      portMappings = [
+        {
+          containerPort = 8080
+          protocol      = "tcp"
+        }
+      ]
+    }
+  ])
 }
