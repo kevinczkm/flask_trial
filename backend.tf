@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     bucket = "sctp-ce10-tfstate"
-    key    = "kvin"  #Change this
+    key    = "kvin.tfstate"  #Change this
     region = "ap-southeast-1"
   }
 }
