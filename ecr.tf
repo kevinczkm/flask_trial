@@ -41,5 +41,5 @@ module "ecs" {
 }
 
 resource "aws_ecs_cluster" "ecs" {
-  name = "${local.prefix}-ecs"  
+  name = "${local.prefix}-cluster"  
 }
