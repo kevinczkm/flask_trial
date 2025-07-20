@@ -30,7 +30,8 @@ jobs:
         
       - name: Terraform Apply
         run: terraform apply -auto-approve
-
+        env:
+          TF_VAR_execution_role_arn: ${{ vars.execution_role_arn }}
     
 
       - name: Login to Amazon ECR
