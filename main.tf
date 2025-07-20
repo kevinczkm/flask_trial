@@ -15,7 +15,7 @@ provider "aws" {
 
 
 locals {
-  prefix = "kvin9"
+  prefix = "kvin"
 }
 
 data "aws_caller_identity" "current" {}
